@@ -1,0 +1,30 @@
+header {
+    color: rgb(233, 0, 233);
+    font-size: 12px;
+}
+
+
+
+
+.btn-start {
+    outline: none;
+    border: none;
+    display: inline-block;
+    padding: 10px 15px;
+    background: var(--primary);
+    font-size: 2.2rem;
+    border-radius: 12px;
+    position: relative;
+    top: -3px;
+    box-shadow: 0 3px grey;
+    background-color: rgb(54, 230, 0);
+  }
+  
+  .btn-start:hover {
+    box-shadow: 0 2px grey;
+    top: -2px;
+  }
+  .btn-start:active {
+    box-shadow: 0 0px grey;
+    top: 0;
+  }
