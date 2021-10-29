@@ -6,7 +6,7 @@ header {
 
 
 
-.btn-start {
+.btn {
     outline: none;
     border: none;
     display: inline-block;
@@ -20,11 +20,11 @@ header {
     background-color: rgb(54, 230, 0);
   }
   
-  .btn-start:hover {
+  .btn:hover {
     box-shadow: 0 2px grey;
     top: -2px;
   }
-  .btn-start:active {
+  .btn:active {
     box-shadow: 0 0px grey;
     top: 0;
   }

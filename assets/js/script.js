@@ -1,4 +1,7 @@
-var qustions = [
+var timerEl = document.getElementById('countdown');
+
+// quiz questions
+var questions = [
     {
         question: "1. Inside the HTML document, where do you place your JavaScript code?",
         choices: ["Inside the <head> element", "In the <footer> element", "Inside the <link> element, Insie the <script> element"],
@@ -19,4 +22,16 @@ var qustions = [
         question: "5. How would you create a box with rounded corners using CSS?",
         choices: ["border-radius: 50px;", "transform: round(corner)", "corner-style: round;", "box-corner: round;"],
         correctAnswer : 0
-    }];
+    }]; 
+
+
+
+
+
+    // var buttonEl = document.querySelector("#start-btn");
+// console.log(buttonEl);
+
+// buttonEl.addEventListener("click", function(){
+//    alert("Test will begin you have 60 seconds to complete!");
+// });
+    
