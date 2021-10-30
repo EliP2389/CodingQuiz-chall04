@@ -1,79 +1,126 @@
-var timerEl = document.getElementById('countdown');
-
-
- var quizQuestions = [
-      {
-          question: "1. Inside the HTML document, where do you place your JavaScript code?",
-          answers: {
-         a: 'Inside the <head> element', 
-         b: 'In the <footer> element', 
-         c: 'Inside the <link> element', 
-         d: 'Inside the <script> element' 
-        },
-        correctAnswer: 'd'
-      }, 
-      {
-          question: "2. How do we declare a conditional statment in JavaScript?",
-          answers: {
-          a: 'for loop',
-          b: 'if...else', 
-          c: 'difference...between', 
-          d: 'while loop' 
-          },
-          correctAnswer: 'b'
-      }, 
-      {
-        question: "3. When using flexbox, which property needs to be adjusted in order to add space between items?",         
-       answers: {
-        a: 'justify-content', 
-        b: 'flex-flow', 
-        c: 'align-content', 
-        d: 'space-between'
-        },
-        correctAnswer: 'a'
+const timerEl = document.getElementById('countdown');
+const questionEl = document.querySelector(".question")
+const answersEl = document.querySelector(".choices")
+const quizContainerEl = document.querySelector(".quiz-container")
+const startQuizEl = document.querySelector(".startquiz")
+let currentQuestionIndex = 0
+var timeLeft = 60;
+let timeInterval;
+const quizQuestions = [
+    {
+        text: "Inside the HTML document, where do you place your JavaScript code?",
+        choices: [
+            { answer: 'Inside the <head> element', correct: false },
+            { answer: 'In the <footer> element', correct: false },
+            { answer: 'Inside the <link> element', correct: false },
+            { answer: 'Inside the <script> element', correct: true }
+        ],
     },
     {
-         question: "4. What are the two types of scope JavaScript uses?",
-         answers: {
-        a:  'Global and Local', 
-        b: 'Surrounding and Inner',
-        c:  'Abroad and Local', 
-        d: 'Outside and Inside'
-            },
-         correctAnswer: 'a'
-      }, 
-      {
-          question: "5. How would you create a box with rounded corners using CSS?",
-          answers: {
-        a: 'border-radius: 50px;', 
-        b: 'transform: round(corner)', 
-        c: 'corner-style: round;', 
-        d: 'box-corner: round;'
-            },
-          correctAnswer : 'a'
-      }
- ];
+        text: "How do we declare a conditional statment in JavaScript?",
+        choices: [
+            { answer: 'for loop', correct: false },
+            { answer: 'if...else', correct: true },
+            { answer: 'difference...between', correct: false },
+            { answer: 'while loop', correct: false },
+        ],
 
-    function generateQuiz(questions, quizContainer, reultsContainer, submitButton)[
+    },
+    {
+        text: "When using flexbox, which property needs to be adjusted in order to add space between items?",
+        choices: [
+            { answer: 'justify-content', correct: true },
+            { answer: 'flex-flow', correct: false },
+            { answer: 'align-content', correct: false },
+            { answer: 'space-between', correct: false },
+        ],
 
-        function showQuestions(questions, quizContainer){
+    },
+    {
+        text: "What are the two types of scope JavaScript uses?",
+        choices: [
+            { answer: 'Global and Local', correct: true },
+            { answer: 'Surrounding and Inner', correct: false },
+            { answer: 'Abroad and Local', correct: false },
+            { answer: 'Outside and Inside', correct: false },
+        ],
 
-        },
+    },
+    {
+        text: "How would you create a box with rounded corners using CSS?",
+        choices: [
+            { answer: 'border-radius: 50px;', correct: true },
+            { answer: 'transform: round(corner)', correct: false },
+            { answer: 'corner-style: round;', correct: false },
+            { answer: 'box-corner: round;', correct: false },
+        ],
 
-        function showResults(questions, quizContainer){
+    }
+];
 
-        },
+function generateQuiz() {
+    const question = quizQuestions[currentQuestionIndex].text
+    questionEl.textContent = question
 
-        showQuestions(questions, quizContainer),
+    answersEl.innerHTML = ""
 
-        submitButton.onclick = function(){
-            showResults(questions, quizContainer, resultsContainer);
+    for (let i = 0; i < quizQuestions[currentQuestionIndex].choices.length; i++) {
+        const choiceEl = document.createElement("li")
+        const isCorrect = quizQuestions[currentQuestionIndex].choices[i].correct
+        //choiceEl.setAttribute("data-set-correct", isCorrect)
+        choiceEl.textContent = quizQuestions[currentQuestionIndex].choices[i].answer
+
+        if (isCorrect) {
+            choiceEl.addEventListener("click", displayCorrectAnswer)
         }
-    ]
+        else {
+            choiceEl.addEventListener("click", displayWrongAnswer)
+        }
+        answersEl.appendChild(choiceEl)
 
-        var timeLeft = 60;
+    }
+    
 
-        var timeInterval = setInterval(function (){
+    function displayCorrectAnswer() {
+        //display correct answer
+        alert("correct answer")
+        if(currentQuestionIndex >= quizQuestions.length){
+            postQuiz()
+        }
+        else{
+            generateQuiz()
+        }
+        
+        //add one to currentQuestionIndex
+        //call generateQuiz again
+    }
+
+    function displayWrongAnswer() {
+        //display wrong answer
+        alert("wrong answer")
+        timeLeft -= 5
+        if(currentQuestionIndex >= quizQuestions.length){
+            postQuiz()
+        }
+        else{
+            generateQuiz()
+        }
+        
+        
+        // add one to currentQuestionIndex
+        //call generateQuiz again
+        //remove time when answered wrong
+    }
+
+    function postQuiz() {
+        alert("finished quiz")
+        clearInterval(timeInterval);
+    }
+
+
+
+    if (currentQuestionIndex == 0){
+         timeInterval = setInterval(function () {
             if (timeLeft > 1) {
                 timerEl.textContent = timeLeft + ' seconds remaining ';
                 timeLeft--;
@@ -84,14 +131,16 @@ var timerEl = document.getElementById('countdown');
             }
             else {
                 timerEl.textContent = ''
-                
+    
                 clearInterval(timeInterval);
             }
-
-        }, 1000);5
-        
-
+    
+        }, 1000);
     }
+    currentQuestionIndex++
+    
+}
 
-
-    document.getElementById("submit").addEventListener("click", startQuiz);
+document.getElementById("submit").addEventListener("click", generateQuiz)
+//startQuizEl.addEventListener("click", generateQuiz)
+//quizContainerEl.addEventListener("click", generateQuiz);
