@@ -4,6 +4,9 @@ const answersEl = document.querySelector(".choices");
 const quizContainerEl = document.querySelector(".quiz-container");
 const startQuizBtnEl = document.querySelector(".start");
 const yourScoreIsEl = document.querySelector(".your-score");
+const initialsSaveEl = document.querySelector(".initials");
+const submitInitialbtnEl = document.querySelector(".submit-initial-btn");
+const highScoresEl = document.querySelector(".highscores");
 
 let currentQuestionIndex = 0
 var timeLeft = 60;
@@ -60,8 +63,8 @@ const quizQuestions = [
             { answer: 'box-corner: round;', correct: false },
         ],
 
-    } 
-]; 
+    }
+];
 
 function generateQuiz() {
     const question = quizQuestions[currentQuestionIndex].text
@@ -81,24 +84,24 @@ function generateQuiz() {
         else {
             choiceEl.addEventListener("click", displayWrongAnswer)
         }
-        
+
         answersEl.appendChild(choiceEl)
 
     }
-    
+
 
     function displayCorrectAnswer() {
         //display correct answer
         alert("correct answer")
         score += 2;
-        if(currentQuestionIndex >= quizQuestions.length){
+        if (currentQuestionIndex >= quizQuestions.length) {
             endQuiz()
         }
-        else{
-            
+        else {
+
             generateQuiz()
         }
-        
+
         //add one to currentQuestionIndex
         //call generateQuiz again
     }
@@ -107,14 +110,14 @@ function generateQuiz() {
         //display wrong answer
         alert("wrong answer")
         timeLeft -= 5
-        if(currentQuestionIndex >= quizQuestions.length){
+        if (currentQuestionIndex >= quizQuestions.length) {
             endQuiz()
         }
-        else{
+        else {
             generateQuiz()
         }
-        
-        
+
+
         // add one to currentQuestionIndex
         //call generateQuiz again
         //remove time when answered wrong
@@ -125,12 +128,13 @@ function generateQuiz() {
         clearInterval(timeInterval);
         saveScore()
         displayScore()
+        initialsSection()
     }
 
 
 
-    if (currentQuestionIndex == 0){
-         timeInterval = setInterval(function () {
+    if (currentQuestionIndex == 0) {
+        timeInterval = setInterval(function () {
             if (timeLeft > 1) {
                 timerEl.textContent = timeLeft + ' seconds remaining ';
                 timeLeft--;
@@ -141,35 +145,61 @@ function generateQuiz() {
             }
             else {
                 timerEl.textContent = ''
-    
+
                 clearInterval(timeInterval);
             }
-    
+
         }, 1000);
     }
     currentQuestionIndex++
 
-function saveScore () {
-    localStorage.setItem("score", JSON.stringify(score));
 }
 
-function displayScore () {
-    var savedScores = localStorage.getItem("score");
-    if(!savedScores) {
-        return false;
+    function saveScore() {
+        localStorage.setItem("score", JSON.stringify(score));
+
     }
-    else {
-        yourScoreIsEl.textContent = ' your score = ' + score;
+
+    function displayScore() {
+        var savedScores = localStorage.getItem("score");
+        if (!savedScores) {
+            return false;
+        }
+        else {
+            yourScoreIsEl.textContent = ' your score = ' + score;
+        }
+
+        savedScores = JSON.parse(savedScores);
+
+        for (let i = 0; i < savedScores.length; i++) {
+            endQuiz(savedScores[i]);
+        }
+
     }
+
+   
+
+
+function initialsSection() {
+
+    var initialsText = document.createElement("input");
+    initialsText.setAttribute("placeholder", "Your Initials");
+    initialsSaveEl.appendChild(initialsText);
+
+    var initialsBtn = document.createElement("button");
+    initialsBtn.textContent = "Submit";
+    initialsBtn.className = "submit-initial-btn"
+    initialsSaveEl.appendChild(initialsBtn);
+
 }
 
-function saveInitials ()
 
 
-}
 
-
-startQuizBtnEl.addEventListener("click", function() {
-   generateQuiz();
+startQuizBtnEl.addEventListener("click", function () {
+    generateQuiz();
 
 })
+
+
+//initialsBtn.addEventListener("click", initialsSection);
