@@ -25,4 +25,6 @@ WHEN the game is over
 THEN I can save my initials and score
 
 ## Preview Of Page
-
+<img src="./assets/images/quiz-img.png">
+<img src="./assets/images/quiz2-img.png">
+<img scr="./assets/images/quiz3-img.png">
