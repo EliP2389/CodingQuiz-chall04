@@ -31,7 +31,9 @@ header {
   li{
     outline: none;
     border: none;
-    display: inline-flex;
+    /* display: inline-flex; */
+    width: 15%;
+    margin-bottom: 5px;
     padding: 10px 15px;
     font-size: 14px;
     color: white;
@@ -90,3 +92,4 @@ header {
     box-shadow: 0 0px grey;
     top: 0;
   }
+

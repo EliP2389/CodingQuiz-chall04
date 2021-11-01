@@ -5,14 +5,16 @@ const quizContainerEl = document.querySelector(".quiz-container");
 const startQuizBtnEl = document.querySelector(".start");
 const yourScoreIsEl = document.querySelector(".your-score");
 const initialsSaveEl = document.querySelector(".initials");
-const submitInitialbtnEl = document.querySelector(".submit-initial-btn");
-const highScoresEl = document.querySelector(".highscores");
+const submitInitialBtnEl = document.querySelector("#submit");
+const savedInitialsEl = document.querySelector(".saved-init");
+//const initEl = document.querySelector(".init");
+
 
 let currentQuestionIndex = 0
 var timeLeft = 60;
 let timeInterval;
-var highScores = [];
 var score = 0;
+var user = [];
 
 const quizQuestions = [
     {
@@ -87,6 +89,7 @@ function generateQuiz() {
 
         answersEl.appendChild(choiceEl)
 
+
     }
 
 
@@ -129,6 +132,8 @@ function generateQuiz() {
         saveScore()
         displayScore()
         initialsSection()
+        hide(answersEl);
+        hide(questionEl);
     }
 
 
@@ -152,6 +157,8 @@ function generateQuiz() {
         }, 1000);
     }
     currentQuestionIndex++
+
+
 
 }
 
@@ -177,21 +184,26 @@ function generateQuiz() {
 
     }
 
-   
+    //hides element
+function hide(element) {
+    element.style.display = "none";
+}
 
 
 function initialsSection() {
-
+    
     var initialsText = document.createElement("input");
+    initialsText.setAttribute("type", "text");
     initialsText.setAttribute("placeholder", "Your Initials");
     initialsText.className = "init"
     initialsSaveEl.appendChild(initialsText);
-
+  
     var initialsBtn = document.createElement("button");
     initialsBtn.textContent = "Submit";
     initialsBtn.className = "submit-initial-btn"
+    initialsBtn.setAttribute("id", "submit")
     initialsSaveEl.appendChild(initialsBtn);
-
+    console.log(initialsBtn);
 }
 
 
@@ -199,8 +211,18 @@ function initialsSection() {
 
 startQuizBtnEl.addEventListener("click", function () {
     generateQuiz();
+    hide(startQuizBtnEl);
 
 })
 
 
-//initialsBtn.addEventListener("click", initialsSection);
+// submitInitialBtnEl.addEventListener("submit", function(){
+//     let initValue = initialsEl.value.trim();
+//     if (initValue) {
+//         let userScore = { username: initValue, userScore: score };
+//         initialsEl.value = '';
+//         highScores = JSON.parse(localStorage.getItem("scores")) || [];
+//         highScores.push(userScore)
+//         localStorage.setItem("scores", JSON.stringify(highScores));
+//     }
+// });
