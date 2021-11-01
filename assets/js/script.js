@@ -127,7 +127,7 @@ function generateQuiz() {
     }
 
     function endQuiz() {
-        alert("finished quiz")
+        console.log("finished quiz")
         clearInterval(timeInterval);
         saveScore()
         displayScore()
@@ -162,42 +162,42 @@ function generateQuiz() {
 
 }
 
-    function saveScore() {
-        localStorage.setItem("score", JSON.stringify(score));
+function saveScore() {
+    localStorage.setItem("score", JSON.stringify(score));
 
+}
+
+function displayScore() {
+    var savedScores = localStorage.getItem("score");
+    if (!savedScores) {
+        return false;
+    }
+    else {
+        yourScoreIsEl.textContent = ' Your Score = ' + score;
     }
 
-    function displayScore() {
-        var savedScores = localStorage.getItem("score");
-        if (!savedScores) {
-            return false;
-        }
-        else {
-            yourScoreIsEl.textContent = ' Your Score = ' + score;
-        }
+    savedScores = JSON.parse(savedScores);
 
-        savedScores = JSON.parse(savedScores);
-
-        for (let i = 0; i < savedScores.length; i++) {
-            endQuiz(savedScores[i]);
-        }
-
+    for (let i = 0; i < savedScores.length; i++) {
+        endQuiz(savedScores[i]);
     }
 
-    //hides element
+}
+
+//hides element
 function hide(element) {
     element.style.display = "none";
 }
 
 
 function initialsSection() {
-    
+
     var initialsText = document.createElement("input");
     initialsText.setAttribute("type", "text");
     initialsText.setAttribute("placeholder", "Your Initials");
     initialsText.className = "init"
     initialsSaveEl.appendChild(initialsText);
-  
+
     var initialsBtn = document.createElement("button");
     initialsBtn.textContent = "Submit";
     initialsBtn.className = "submit-initial-btn"

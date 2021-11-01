@@ -1,22 +1,29 @@
 header {
     color: rgb(141, 0, 141);
     font-size: 12px;
+    flex: wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.startquiz h1  {
+    display: flex;
+    justify-content: center;
 }
 
 
-
-
 .start {
+    text-align: center;
+    margin: auto;
+    display: flex;
     outline: none;
     border: none;
-    display: inline-block;
-    padding: 10px 15px;
+     padding: 10px 15px;
     font-size: 35px;
     border-radius: 12px;
-    position: relative;
-    top: -3px;
     box-shadow: 0 3px grey;
     background-color: rgb(54, 230, 0);
+    
   }
   
   .start:hover {
@@ -29,6 +36,9 @@ header {
   }
 
   li{
+      text-align: center;
+      margin: auto;
+      justify-content: center;
     outline: none;
     border: none;
     /* display: inline-flex; */
@@ -38,7 +48,6 @@ header {
     font-size: 14px;
     color: white;
     border-radius: 12px;
-    position: relative;
     top: -3px;
     box-shadow: 0 3px grey;
     background-color: rgb(141, 0, 141);
@@ -55,16 +64,23 @@ header {
   }
 
   .question {
+    display: flex;
       font-size: 22px;
       font-weight: bolder;
+      justify-content: center;
+      
   }
 
   .your-score { 
+      text-align: center;
       font-size: 22px;
       font-weight: bolder;
   }
 
   .init {
+      text-align: center;
+      margin: auto;
+      justify-content: center;
       border-radius: 5px;
       font-size: 16px;
   }
@@ -93,3 +109,10 @@ header {
     top: 0;
   }
 
+.initials{
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    
+    
+}
