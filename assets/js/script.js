@@ -166,7 +166,7 @@ function generateQuiz() {
             return false;
         }
         else {
-            yourScoreIsEl.textContent = ' your score = ' + score;
+            yourScoreIsEl.textContent = ' Your Score = ' + score;
         }
 
         savedScores = JSON.parse(savedScores);
