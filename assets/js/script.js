@@ -184,6 +184,7 @@ function initialsSection() {
 
     var initialsText = document.createElement("input");
     initialsText.setAttribute("placeholder", "Your Initials");
+    initialsText.className = "init"
     initialsSaveEl.appendChild(initialsText);
 
     var initialsBtn = document.createElement("button");
