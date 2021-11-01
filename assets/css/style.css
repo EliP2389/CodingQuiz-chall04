@@ -81,3 +81,12 @@ header {
     background-color: rgb(0, 3, 206)
     
   }
+
+  .submit-initial-btn:hover {
+    box-shadow: 0 2px grey;
+    top: -2px;
+  }
+  .submit-initial-btn:active {
+    box-shadow: 0 0px grey;
+    top: 0;
+  }
