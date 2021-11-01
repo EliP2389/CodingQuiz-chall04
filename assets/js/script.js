@@ -2,10 +2,19 @@ const timerEl = document.getElementById('countdown');
 const questionEl = document.querySelector(".question")
 const answersEl = document.querySelector(".choices")
 const quizContainerEl = document.querySelector(".quiz-container")
-const startQuizEl = document.querySelector(".startquiz")
+const startQuizBtnEl = document.querySelector(".start")
+
+//input scores
+const inputScoreEl = document.querySelector("#inputScore");
+const initialsEl = document.querySelector("#initials");
+const submitInitialsBtnEl = document.querySelector("#submitInitials");
+const userScoreEl = document.querySelector("#score");
+//global variables
 let currentQuestionIndex = 0
 var timeLeft = 60;
 let timeInterval;
+let score = 0;
+
 const quizQuestions = [
     {
         text: "Inside the HTML document, where do you place your JavaScript code?",
@@ -55,8 +64,8 @@ const quizQuestions = [
             { answer: 'box-corner: round;', correct: false },
         ],
 
-    }
-];
+    } 
+]; 
 
 function generateQuiz() {
     const question = quizQuestions[currentQuestionIndex].text
@@ -76,6 +85,7 @@ function generateQuiz() {
         else {
             choiceEl.addEventListener("click", displayWrongAnswer)
         }
+        
         answersEl.appendChild(choiceEl)
 
     }
@@ -85,9 +95,10 @@ function generateQuiz() {
         //display correct answer
         alert("correct answer")
         if(currentQuestionIndex >= quizQuestions.length){
-            postQuiz()
+            endQuiz()
         }
         else{
+            score += 2;
             generateQuiz()
         }
         
@@ -100,7 +111,7 @@ function generateQuiz() {
         alert("wrong answer")
         timeLeft -= 5
         if(currentQuestionIndex >= quizQuestions.length){
-            postQuiz()
+            endQuiz()
         }
         else{
             generateQuiz()
@@ -112,7 +123,7 @@ function generateQuiz() {
         //remove time when answered wrong
     }
 
-    function postQuiz() {
+    function endQuiz() {
         alert("finished quiz")
         clearInterval(timeInterval);
     }
@@ -138,9 +149,19 @@ function generateQuiz() {
         }, 1000);
     }
     currentQuestionIndex++
+
     
 }
 
-document.getElementById("submit").addEventListener("click", generateQuiz)
+function hide(element) {
+    element.style.display = "none"
+}
+startQuizBtnEl.addEventListener("click", function() {
+   generateQuiz();
+   hide(startQuizBtnEl)
+})
+
+
+// document.getElementById("submit").addEventListener("click", generateQuiz)
 //startQuizEl.addEventListener("click", generateQuiz)
 //quizContainerEl.addEventListener("click", generateQuiz);
