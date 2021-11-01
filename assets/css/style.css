@@ -31,7 +31,7 @@ header {
   li{
     outline: none;
     border: none;
-    display: inline-block;
+    display: inline-flex;
     padding: 10px 15px;
     font-size: 12px;
     border-radius: 12px;

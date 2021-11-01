@@ -1,19 +1,15 @@
 const timerEl = document.getElementById('countdown');
-const questionEl = document.querySelector(".question")
-const answersEl = document.querySelector(".choices")
-const quizContainerEl = document.querySelector(".quiz-container")
-const startQuizBtnEl = document.querySelector(".start")
+const questionEl = document.querySelector(".question");
+const answersEl = document.querySelector(".choices");
+const quizContainerEl = document.querySelector(".quiz-container");
+const startQuizBtnEl = document.querySelector(".start");
+const yourScoreIsEl = document.querySelector(".your-score");
 
-//input scores
-const inputScoreEl = document.querySelector("#inputScore");
-const initialsEl = document.querySelector("#initials");
-const submitInitialsBtnEl = document.querySelector("#submitInitials");
-const userScoreEl = document.querySelector("#score");
-//global variables
 let currentQuestionIndex = 0
 var timeLeft = 60;
 let timeInterval;
-let score = 0;
+var highScores = [];
+var score = 0;
 
 const quizQuestions = [
     {
@@ -71,8 +67,8 @@ function generateQuiz() {
     const question = quizQuestions[currentQuestionIndex].text
     questionEl.textContent = question
 
-    answersEl.innerHTML = ""
-
+    answersEl.innerHTML = "";
+    //displays questions and answers
     for (let i = 0; i < quizQuestions[currentQuestionIndex].choices.length; i++) {
         const choiceEl = document.createElement("li")
         const isCorrect = quizQuestions[currentQuestionIndex].choices[i].correct
@@ -94,11 +90,12 @@ function generateQuiz() {
     function displayCorrectAnswer() {
         //display correct answer
         alert("correct answer")
+        score += 2;
         if(currentQuestionIndex >= quizQuestions.length){
             endQuiz()
         }
         else{
-            score += 2;
+            
             generateQuiz()
         }
         
@@ -126,6 +123,8 @@ function generateQuiz() {
     function endQuiz() {
         alert("finished quiz")
         clearInterval(timeInterval);
+        saveScore()
+        displayScore()
     }
 
 
@@ -150,18 +149,27 @@ function generateQuiz() {
     }
     currentQuestionIndex++
 
-    
+function saveScore () {
+    localStorage.setItem("score", JSON.stringify(score));
 }
 
-function hide(element) {
-    element.style.display = "none"
+function displayScore () {
+    var savedScores = localStorage.getItem("score");
+    if(!savedScores) {
+        return false;
+    }
+    else {
+        yourScoreIsEl.textContent = ' your score = ' + score;
+    }
 }
+
+function saveInitials ()
+
+
+}
+
+
 startQuizBtnEl.addEventListener("click", function() {
    generateQuiz();
-   hide(startQuizBtnEl)
+
 })
-
-
-// document.getElementById("submit").addEventListener("click", generateQuiz)
-//startQuizEl.addEventListener("click", generateQuiz)
-//quizContainerEl.addEventListener("click", generateQuiz);
